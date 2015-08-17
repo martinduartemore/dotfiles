@@ -1,0 +1,106 @@
+"""""""""""""""""""""""""""""
+" General
+"""""""""""""""""""""""""""""
+
+" Remove vi compatibility
+set nocompatible
+
+" Automatically reload a file when it changes
+set autoread
+
+
+"""""""""""""""""""""""""""""
+" VIM User Interface
+"""""""""""""""""""""""""""""
+
+" Set scrolloff so lines are visible
+" below/above the cursor
+set so = 7
+
+" Turn on the WiLd menu
+set wildmenu
+
+" Ignore compiled files
+set wildignore = *.o, *~, *.pyc 
+
+" Show the current position
+set ruler
+
+" Show line numbers
+set number
+
+" Ignore case while searching
+set ignorecase
+
+" Use smartcase for searching
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Highlight current search result
+set incsearch
+
+" Show matching brackets
+set showmatch
+
+" Blink matching brackets for
+" this many thenths of a second
+set mat = 2
+
+
+"""""""""""""""""""""""""""""
+" Colors and Themes
+"""""""""""""""""""""""""""""
+
+" Enable syntax highlight
+syntax enable
+
+" Backgound color
+set background = dark
+
+" Set colorscheme
+colorscheme desert
+
+" Always use UTF8 encoding
+set encoding = utf8
+
+
+"""""""""""""""""""""""""""""
+" Text, Tab and Indent
+"""""""""""""""""""""""""""""
+
+" Use smart tabs
+set smarttab
+
+set autoindent
+set smartindent
+set wrap
+
+" Set tab size
+set shiftwidth = 4
+set tabstop = 4
+
+" Use tabs, not spaces
+set noexpandtab
+
+
+"""""""""""""""""""""""""""""
+" Status line
+"""""""""""""""""""""""""""""
+
+" Always show the status line
+set laststatus = 2
+
+" Status line formatting
+set statusline=
+set statusline+=%f		" Path to the file
+set statusline+=%m		" Modified flag
+set statusline+=\ -\		" Separator
+set statusline+=%y		" File type
+set statusline+=%=		" Switch to right side
+set statusline+=%l		" Current line
+set statusline+=/		" Separator
+set statusline+=%L		" Total lines
+set statusline+=%4v		" Virtual column number
+set statusline+=%2p%%		" Percentage through file
