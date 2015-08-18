@@ -15,13 +15,13 @@ set autoread
 
 " Set scrolloff so lines are visible
 " below/above the cursor
-set so = 7
+set so=7
 
 " Turn on the WiLd menu
 set wildmenu
 
 " Ignore compiled files
-set wildignore = *.o, *~, *.pyc 
+set wildignore=*.o,*~,*.pyc 
 
 " Show the current position
 set ruler
@@ -46,7 +46,7 @@ set showmatch
 
 " Blink matching brackets for
 " this many thenths of a second
-set mat = 2
+set mat=2
 
 
 """""""""""""""""""""""""""""
@@ -56,14 +56,17 @@ set mat = 2
 " Enable syntax highlight
 syntax enable
 
+" Set vim to use 256 colors
+set t_Co=256
+
 " Backgound color
-set background = dark
+set background=dark
 
 " Set colorscheme
 colorscheme desert
 
 " Always use UTF8 encoding
-set encoding = utf8
+set encoding=utf8
 
 
 """""""""""""""""""""""""""""
@@ -78,8 +81,8 @@ set smartindent
 set wrap
 
 " Set tab size
-set shiftwidth = 4
-set tabstop = 4
+set shiftwidth=4
+set tabstop=4
 
 " Use tabs, not spaces
 set noexpandtab
@@ -90,17 +93,16 @@ set noexpandtab
 """""""""""""""""""""""""""""
 
 " Always show the status line
-set laststatus = 2
+set laststatus=2
 
 " Status line formatting
 set statusline=
-set statusline+=%f		" Path to the file
-set statusline+=%m		" Modified flag
-set statusline+=\ -\		" Separator
 set statusline+=%y		" File type
+set statusline+=%.20F	" Full path to the file
+set statusline+=%m		" Modified flag
 set statusline+=%=		" Switch to right side
 set statusline+=%l		" Current line
 set statusline+=/		" Separator
 set statusline+=%L		" Total lines
 set statusline+=%4v		" Virtual column number
-set statusline+=%2p%%		" Percentage through file
+set statusline+=%4p%%	" Percentage through file

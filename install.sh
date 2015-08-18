@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR = ~/dotfiles
+DIR=~/dotfiles
 
 install_vim()
 {
