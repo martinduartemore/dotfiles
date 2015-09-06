@@ -8,7 +8,7 @@ install_vim()
 		rm ~/.vim
 	fi
 	ln -fs $DIR/vim ~/.vim
-	ln -fs $DIR/vimrc ~/.vimrc
+	ln -fs ~/.vim/vimrc ~/.vimrc
 }
 
 install()
