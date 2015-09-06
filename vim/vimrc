@@ -81,8 +81,9 @@ set smartindent
 set wrap
 
 " Set tab size
-set shiftwidth=4
 set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 
 " Use tabs, not spaces
 set noexpandtab

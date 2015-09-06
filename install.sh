@@ -4,7 +4,9 @@ DIR=~/dotfiles
 
 install_vim()
 {
-	rm ~/.vim
+	if [ -f ~/.vim ]; then
+		rm ~/.vim
+	fi
 	ln -fs $DIR/vim ~/.vim
 	ln -fs $DIR/vimrc ~/.vimrc
 }
