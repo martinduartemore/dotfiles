@@ -13,7 +13,9 @@ install_vim()
 
 install()
 {
+	echo "Installing VIM configurations..."
 	install_vim
+	echo "Done"
 }
 
 install
