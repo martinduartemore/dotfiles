@@ -3,4 +3,4 @@
 """""""""""""""""""""""""""""
 
 " Make PDDL files have LISP highlighting
-autocmd BufNewFile,BufRead *.pddl set filetype=lisp
+autocmd BufNewFile,BufRead *.pddl setfiletype lisp
