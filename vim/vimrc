@@ -62,11 +62,14 @@ syntax enable
 " Set vim to use 256 colors
 set t_Co=256
 
+" Color fix for Solarized in terminal mode
+let g:solarized_termcolors=256
+
 " Backgound color
 set background=dark
 
 " Set colorscheme
-colorscheme desert
+colorscheme solarized
 
 " Always use UTF8 encoding
 set encoding=utf8

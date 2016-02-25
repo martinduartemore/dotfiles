@@ -4,18 +4,23 @@ DIR=~/dotfiles
 
 install_vim()
 {
+	echo "Installing VIM configurations..."
+
+	# Cleanup old vim configurations
 	if [ -f ~/.vim ]; then
 		rm ~/.vim
 	fi
+
+	# Copy new vim configurations
 	ln -fs $DIR/vim ~/.vim
-	ln -fs ~/.vim/vimrc ~/.vimrc
+	ln -fs $DIR/vimrc ~/.vimrc
+
+	echo "Done installing VIM."
 }
 
 install()
 {
-	echo "Installing VIM configurations..."
 	install_vim
-	echo "Done"
 }
 
 install
