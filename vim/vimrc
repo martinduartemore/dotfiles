@@ -23,8 +23,11 @@ set so=7
 " Turn on the WiLd menu
 set wildmenu
 
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc 
+" Ignore compiled files in wildmenu
+set wildignore=*.o,*~,*.pyc,*.swp
+
+" Ignore swap files in netwr
+let g:netrw_list_hide='.*\.swp$'
 
 " Show the current position
 set ruler
