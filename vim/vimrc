@@ -8,8 +8,8 @@ set nocompatible
 " Automatically reload a file when it changes
 set autoread
 
-" Detect file types for ftplugin
-filetype plugin on
+" Enable file type, plugin and indentation files
+filetype plugin indent on
 
 
 """""""""""""""""""""""""""""
@@ -68,25 +68,33 @@ set t_Co=256
 " Color fix for Solarized in terminal mode
 let g:solarized_termcolors=256
 
+" Set special characters visibility
+let g:solarized_visibility="low"
+
 " Backgound color
 set background=dark
 
 " Set colorscheme
 colorscheme solarized
 
-" Always use UTF8 encoding
-set encoding=utf8
-
 
 """""""""""""""""""""""""""""
 " Text, Tab and Indent
 """""""""""""""""""""""""""""
 
+" Always use UTF-8 encoding
+set encoding=utf8
+
 " Use smart tabs
 set smarttab
 
+" Use indent from previous line
 set autoindent
+
+" Recognize C syntax to add/remove indents
 set smartindent
+
+" Enable word wrapping
 set wrap
 
 " Set tab size
@@ -96,6 +104,16 @@ set shiftwidth=4
 
 " Use tabs, not spaces
 set noexpandtab
+
+" Show special characters by default
+set list
+
+" Change tab and end-of-line characters
+set listchars=tab:▸\ ,eol:¬
+
+"Invisible character colors 
+"highlight NonText guifg=#4a4a59
+"highlight SpecialKey guifg=#4a4a59
 
 
 """""""""""""""""""""""""""""
