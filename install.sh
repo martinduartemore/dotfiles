@@ -1,6 +1,21 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
 
-DIR=~/dotfiles
+declare -r DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n" 
+
+get_os() {
+	declare -r OS_NAME="$(uname -s)"
+	local os=""
+
+	if [ "${OS_NAME}" = "Linux" ]; then
+		os="Linux"
+	elif []; then
+		os="OSX"
+	fi
+
+	printf "Operating system: %s\n" "${os}"
+}
 
 install_vim()
 {
@@ -12,8 +27,8 @@ install_vim()
 	fi
 
 	# Copy new vim configurations
-	ln -fs $DIR/vim ~/.vim
-	ln -fs $DIR/vimrc ~/.vimrc
+	ln -fs $DOTFILES_DIR/vim ~/.vim
+	ln -fs $DOTFILES_DIR/vimrc ~/.vimrc
 
 	echo "Done installing VIM."
 }
