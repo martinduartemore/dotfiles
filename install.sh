@@ -2,19 +2,28 @@
 set -o errexit
 set -o nounset
 
-declare -r DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n" 
 
-get_os() {
-	declare -r OS_NAME="$(uname -s)"
+get_script_dir()
+{
+	printf "%s" "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+}
+
+get_os()
+{
 	local os=""
+	
+	case ${OSTYPE} in
+		linux*)		os="linux" ;;
+		darwin*)	os="macos" ;;
+		*)			os="unknown" ;;
+	esac
 
-	if [ "${OS_NAME}" = "Linux" ]; then
-		os="Linux"
-	elif []; then
-		os="OSX"
-	fi
+	printf "%s" "${os}"
+}
 
-	printf "Operating system: %s\n" "${os}"
+is_root()
+{
+	[[ ${EUID} = 0 ]]
 }
 
 install_vim()
@@ -35,6 +44,17 @@ install_vim()
 
 install()
 {
+	printf "Installing dotfiles...\n"
+
+	local root_status=""
+	if is_root; then root_status="[x]"; else root_status="[ ]"; fi
+	printf "Root status: %s\n" "${root_status}"
+
+	declare -r OS="$(get_os)"
+	declare -r DOTFILES_DIR="$(get_script_dir)" 
+	printf "Operating System: %s\n" "${OS}"
+	printf "Dotfiles directory: %s\n" "$(get_script_dir)"
+
 	install_vim
 }
 
