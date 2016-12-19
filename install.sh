@@ -2,17 +2,20 @@
 set -o errexit
 set -o nounset
 
+# logging
+print_header()	{ printf "\e[1;37m$@\e[0m"		; }
+print_question(){ printf "\e[1;33m[?]\e[0m $@"	; }
+print_success()	{ printf "\e[1;32m[v]\e[0m $@"	; }
+print_error()	{ printf "\e[1;31m[x]\e[0m $@"	; }
+print_info()	{ printf "\e[1;36m[>]\e[0m $@"	; }
 
-get_script_dir()
-{
-	printf "%s" "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-}
-
+script_dir() { printf "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"; }
+is_root() { [[ "${EUID}" = 0 ]]; }
 get_os()
 {
 	local os=""
 	
-	case ${OSTYPE} in
+	case "${OSTYPE}" in
 		linux*)		os="linux" ;;
 		darwin*)	os="macos" ;;
 		*)			os="unknown" ;;
@@ -21,41 +24,32 @@ get_os()
 	printf "%s" "${os}"
 }
 
-is_root()
+symlink_file()
 {
-	[[ ${EUID} = 0 ]]
+	local src="${dotfiles_dir}/${1}"
+	local dst="${HOME}/.${1}"
+
+	print_info "Deleting ${dst}\n"
+	rm -rf "${dst}"
+
+	print_info "Copying ${src} to ${dst}\n"
+	ln -fs "${src}" "${dst}"
 }
 
-install_vim()
+main()
 {
-	echo "Installing VIM configurations..."
+	print_header "Gathering system information...\n"
+	declare -r os="$(get_os)"
+	declare -r dotfiles_dir="$(script_dir)" 
+	print_info "Operating system: ${os}\n"
+	print_info "Home directory: ${HOME}\n"
+	print_info "Dotfiles directory: ${dotfiles_dir}\n"
 
-	# Cleanup old vim configurations
-	if [ -f ~/.vim ]; then
-		rm ~/.vim
-	fi
+	print_header "Symlinking files...\n"
+	symlink_file "vim"
+	symlink_file "vimrc"
 
-	# Copy new vim configurations
-	ln -fs $DOTFILES_DIR/vim ~/.vim
-	ln -fs $DOTFILES_DIR/vimrc ~/.vimrc
-
-	echo "Done installing VIM."
+	print_success "Done installing dotfiles!\n"
 }
 
-install()
-{
-	printf "Installing dotfiles...\n"
-
-	local root_status=""
-	if is_root; then root_status="[x]"; else root_status="[ ]"; fi
-	printf "Root status: %s\n" "${root_status}"
-
-	declare -r OS="$(get_os)"
-	declare -r DOTFILES_DIR="$(get_script_dir)" 
-	printf "Operating System: %s\n" "${OS}"
-	printf "Dotfiles directory: %s\n" "$(get_script_dir)"
-
-	install_vim
-}
-
-install
+main "$@"
