@@ -102,8 +102,8 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-" Use tabs, not spaces
-set noexpandtab
+" Use spaces
+set expandtab
 
 " Show special characters by default
 set list
@@ -125,12 +125,12 @@ set laststatus=2
 
 " Status line formatting
 set statusline=
-set statusline+=%y		" File type
-set statusline+=%.20F	" Full path to the file
-set statusline+=%m		" Modified flag
-set statusline+=%=		" Switch to right side
-set statusline+=%l		" Current line
-set statusline+=/		" Separator
-set statusline+=%L		" Total lines
-set statusline+=%4v		" Virtual column number
-set statusline+=%4p%%	" Percentage through file
+set statusline+=%y      " File type
+set statusline+=%.20F   " Full path to the file
+set statusline+=%m      " Modified flag
+set statusline+=%=      " Switch to right side
+set statusline+=%l      " Current line
+set statusline+=/       " Separator
+set statusline+=%L      " Total lines
+set statusline+=%4v     " Virtual column number
+set statusline+=%4p%%   " Percentage through file
