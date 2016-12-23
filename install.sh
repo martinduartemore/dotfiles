@@ -4,10 +4,10 @@ set -o nounset
 
 # logging
 print_header()  { printf "\e[1;37m$@\e[0m"      ; }
-print_question(){ printf "\e[1;33m[?]\e[0m $@"  ; }
 print_success() { printf "\e[1;32m[v]\e[0m $@"  ; }
 print_error()   { printf "\e[1;31m[x]\e[0m $@"  ; }
 print_info()    { printf "\e[1;36m[>]\e[0m $@"  ; }
+print_ask()     { printf "\e[1;33m[?]\e[0m $@"  ; }
 
 
 # utils
