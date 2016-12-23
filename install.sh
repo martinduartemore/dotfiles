@@ -9,8 +9,12 @@ print_success()	{ printf "\e[1;32m[v]\e[0m $@"	; }
 print_error()	{ printf "\e[1;31m[x]\e[0m $@"	; }
 print_info()	{ printf "\e[1;36m[>]\e[0m $@"	; }
 
+
+# utils
 script_dir() { printf "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"; }
+
 is_root() { [[ "${EUID}" = 0 ]]; }
+
 get_os()
 {
 	local os=""
@@ -26,6 +30,7 @@ get_os()
 
 symlink_file()
 {
+	print_info "Attempting to symlink \"${1}\"\n"
 	local src="${dotfiles_dir}/${1}"
 	local dst="${HOME}/.${1}"
 
@@ -33,8 +38,9 @@ symlink_file()
 	rm -rf "${dst}"
 
 	print_info "Copying ${src} to ${dst}\n"
-	ln -fs "${src}" "${dst}"
+	ln -s "${src}" "${dst}"
 }
+
 
 main()
 {
@@ -47,9 +53,8 @@ main()
 
 	print_header "Symlinking files...\n"
 	symlink_file "vim"
-	symlink_file "vimrc"
 
 	print_success "Done installing dotfiles!\n"
 }
 
-main "$@"
+main "${@}"
