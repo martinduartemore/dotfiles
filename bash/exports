@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# only 'export' variables that should be 'seen' by other programs
+
+# make vim the default editor
+export EDITOR="vim"
+export VISUAL="${EDITOR}"
+
+HISTSIZE=10000
+HISTFILESIZE="${HISTSIZE}"
+HISTCONTROL=ignoreboth
+HISTIGNORE="ls:cd"
+HISTTIMEFORMAT="(%F %T) "

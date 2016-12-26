@@ -3,11 +3,11 @@ set -o errexit
 set -o nounset
 
 # logging
-print_header()  { printf "\e[1;37m$@\e[0m"      ; }
-print_success() { printf "\e[1;32m[v]\e[0m $@"  ; }
-print_error()   { printf "\e[1;31m[x]\e[0m $@"  ; }
-print_info()    { printf "\e[1;36m[>]\e[0m $@"  ; }
-print_ask()     { printf "\e[1;33m[?]\e[0m $@"  ; }
+print_header()  { printf "\e[1;37m${@}\e[0m"    ; }
+print_success() { printf "\e[1;32m[v]\e[0m ${@}"; }
+print_error()   { printf "\e[1;31m[x]\e[0m ${@}"; }
+print_info()    { printf "\e[1;36m[>]\e[0m ${@}"; }
+print_ask()     { printf "\e[1;33m[?]\e[0m ${@}"; }
 
 
 # utils
@@ -20,9 +20,9 @@ get_os()
     local os=""
     
     case "${OSTYPE}" in
-        linux*)     os="linux" ;;
-        darwin*)    os="macos" ;;
-        *)          os="unknown" ;;
+        linux*)     os="linux"  ;;
+        darwin*)    os="macos"  ;;
+        *)          os="unknown";;
     esac
 
     printf "%s" "${os}"
@@ -53,6 +53,8 @@ main()
 
     print_header "Symlinking files...\n"
     symlink_file "vim"
+    symlink_file "bashrc"
+    symlink_file "bash_profile"
 
     print_success "Done installing dotfiles!\n"
 }

@@ -1,0 +1,17 @@
+# easier navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+# grep settings
+alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
+alias fgrep="fgrep --color=auto"
+
+# ls settings
+alias ls="ls --color=auto"
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
