@@ -2,57 +2,52 @@
 " General
 """""""""""""""""""""""""""""
 
-" Remove vi compatibility
-set nocompatible
+set nocompatible        " remove vi compatibility
+set autoread            " reload files when they change out of vim
 
-" Automatically reload a file when it changes
-set autoread
-
-" Enable file type, plugin and indentation files
-filetype plugin indent on
+filetype plugin on      " enable plugin files
+filetype indent on      " enable indentation files
 
 
 """""""""""""""""""""""""""""
 " VIM User Interface
 """""""""""""""""""""""""""""
 
-" Set scrolloff so lines are visible
-" below/above the cursor
-set so=7
+set scrolloff=7         "scroll keeping lines above/below
+set sidescroll=1        "enable horizontal scroll off
+set sidescrolloff=3     "scroll keeping columns left/right
 
-" Turn on the WiLd menu
-set wildmenu
+set wildmenu            " turn on the WiLd menu
 
-" Ignore compiled files in wildmenu
-set wildignore=*.o,*~,*.pyc,*.swp
+" Lazy file name tab completion
+set wildmode=longest:list,full
+
+set wildignore=         " ignore files in wildmenu
+set wildignore+=*.sw?   " swap files
+set wildignore+=.git
+set wildignore+=*.o,*.obj,*.exe,*.dll
+set wildignore+=*~,*.pyc
 
 " Ignore swap files in netwr
 let g:netrw_list_hide='.*\.swp$'
 
-" Show the current position
-set ruler
+set ruler               " show the current position
+set number              " show line numbers
+set ignorecase          " ignore case while searching
+set smartcase           " use smartcase for searching
+set hlsearch            " highlight search results
+set incsearch           " highlight current search results
+set showmatch           " show matching brackets
+set mat=2               " blink matching brackets (tenths of seconds)
 
-" Show line numbers
-set number
 
-" Ignore case while searching
-set ignorecase
-
-" Use smartcase for searching
-set smartcase
-
-" Highlight search results
-set hlsearch
-
-" Highlight current search result
-set incsearch
-
-" Show matching brackets
-set showmatch
-
-" Blink matching brackets for
-" this many thenths of a second
-set mat=2
+" Backups and temp files
+set history=1000        " expand history of commands
+set undofile            " enable undo file
+set undodir=~/.vim/tmp/undo//
+set backupdir=~/.vim/tmp/backup//
+set directory=~/.vim/tmp/swap//
+set undoreload=1000     "
 
 
 """""""""""""""""""""""""""""
@@ -60,68 +55,62 @@ set mat=2
 """""""""""""""""""""""""""""
 
 " Enable syntax highlight
-syntax enable
+syntax enable           " enable syntax highlighting
 
-" Set vim to use 256 colors
-set t_Co=256
+"set t_Co=256           " use 256 colors
+set t_Co=16             " use 16 colors (ANSI colors)
 
-" Color fix for Solarized in terminal mode
-let g:solarized_termcolors=256
-
-" Set special characters visibility
-let g:solarized_visibility="low"
-
-" Backgound color
-set background=dark
+set background=dark     " background color
 
 " Set colorscheme
-colorscheme solarized
+"colorscheme solarized
+colorscheme base16-default-dark
 
 
 """""""""""""""""""""""""""""
 " Text, Tab and Indent
 """""""""""""""""""""""""""""
 
-" Always use UTF-8 encoding
-set encoding=utf8
+set encoding=utf8       " use utf8 encoding
+set smarttab            " use smart tabs
+set autoindent          " use indent from previous line
 
-" Use smart tabs
-set smarttab
+set smartindent         " recognize C syntax to add/remove indents
 
-" Use indent from previous line
-set autoindent
+set wrap                " enable word wrapping
 
-" Recognize C syntax to add/remove indents
-set smartindent
+set tabstop=4           " tab size in spaces
+set softtabstop=4       " tab
+set shiftwidth=4        " indent size
 
-" Enable word wrapping
-set wrap
+set expandtab           " use spaces instead of tabs
 
-" Set tab size
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set list                " show special characters
+set showbreak=↪\        " break-line indicator
 
-" Use spaces
-set expandtab
 
-" Show special characters by default
-set list
+set listchars=          " special characters to show
+set listchars+=tab:▸\ ,eol:↵
+set listchars+=trail:·,nbsp:·
+set listchars+=precedes:‹,extends:›
+"set listchars+=space:·
 
-" Change tab and end-of-line characters
-set listchars=tab:▸\ ,eol:¬
-
-"Invisible character colors 
+"Invisible character colors
 "highlight NonText guifg=#4a4a59
 "highlight SpecialKey guifg=#4a4a59
+
+" Enable folding
+"set foldmethod=indent   " fold based on indent
+set foldmethod=marker  " fold based on markers
+set foldnestmax=3       " deepest gold is 3 levels
+set nofoldenable        " dont fold by default
 
 
 """""""""""""""""""""""""""""
 " Status line
 """""""""""""""""""""""""""""
 
-" Always show the status line
-set laststatus=2
+set laststatus=2        " always show the status line
 
 " Status line formatting
 set statusline=
@@ -134,3 +123,74 @@ set statusline+=/       " Separator
 set statusline+=%L      " Total lines
 set statusline+=%4v     " Virtual column number
 set statusline+=%4p%%   " Percentage through file
+
+
+"""""""""""""""""""""""""""""
+" Misc
+"""""""""""""""""""""""""""""
+
+" autoload vimrc
+augroup reload_vimrc
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+" resize splits if the window size changes
+autocmd VimResized * exe "normal! \<c-w>="
+
+
+"""""""""""""""""""""""""""""
+" Mappings
+"""""""""""""""""""""""""""""
+
+" easier navigation through Control-{h,j,k,l}
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+
+
+"""""""""""""""""""""""""""""
+" Functions
+"""""""""""""""""""""""""""""
+
+" clean extra spaces (whilst keeping track of current cursor position)
+function! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfunction
+
+" change between relative and absolute numbers
+function! ToggleRelativeAbsoluteNumber()
+    if !&number && !&relativenumber
+        set number
+        set norelativenumber
+    elseif &number && !&relativenumber
+        set nonumber
+        set relativenumber
+    elseif !&number && &relativenumber
+        set number
+        set relativenumber
+    elseif &number && &relativenumber
+        set nonumber
+        set norelativenumber
+    endif
+endfunction
+
+" word frequency function
+function! WordFrequency() range
+    let all = split(join(getline(a:firstline, a:lastline)), '\A\+')
+    let frequencies = {}
+    for word in all
+        let frequencies[word] = get(frequencies, word, 0) + 1
+    endfor
+    let lst = []
+    for [key,value] in items(frequencies)
+        call add(lst, value."\t".key."\n")
+    endfor
+    call sort(lst)
+    echo join(lst)
+endfunction

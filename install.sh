@@ -18,7 +18,7 @@ is_root() { [[ "${EUID}" = 0 ]]; }
 get_os()
 {
     local os=""
-    
+
     case "${OSTYPE}" in
         linux*)     os="linux"  ;;
         darwin*)    os="macos"  ;;
