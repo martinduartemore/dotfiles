@@ -1,0 +1,62 @@
+! urxvt Xresources configurations
+
+! general
+!urxvt.termName: 
+!urxvt.iconFile: 
+urxvt.depth: 32
+urxvt.saveLines: 10000
+urxvt.cursorBlink: true
+urxvt.iso14755: false
+urxvt.iso14755_52: false
+
+
+! extensions
+! more paths to search for scripts (~/.urxvt/ext/ is also default)
+urxvt.perl-lib: /usr/lib/urxvt/perl
+urxvt.perl-ext-common: default,matcher,fullscreen,font-size,clipboard
+
+! matcher
+urxvt.url-launcher: /usr/bin/xdg-open 
+!urxvt.matcher.button: 1
+
+! fullscreen
+urxvt.keysym.F11: perl:fullscreen:switch
+
+! font-size
+urxvt.font-size.step:       1
+urxvt.keysym.Control-minus: perl:font-size:decrease
+urxvt.keysym.Control-equal: perl:font-size:increase
+urxvt.keysym.Control-0:     perl:font-size:reset
+urxvt.keysym.Control-slash: perl:font-size:show
+
+! clipboard
+! I only got this script because I could not find a better way to override the
+! default keybindings for copying/pasting without altering the original scripts
+urxvt.keysym.Control-Shift-C:       perl:clipboard:copy
+urxvt.keysym.Control-Shift-V:       perl:clipboard:paste
+urxvt.keysym.Control-Shift-Meta-V:  perl:clipboard:paste_escaped
+! default is xsel -ib
+urxvt.clipboard.copycmd:  xclip -i -selection clipboard
+! default is xsel -ob
+urxvt.clipboard.pastecmd: xclip -o -selection clipboard
+
+
+! font
+urxvt.font: xft:monospace:size=12
+!urxvt.boldFont:
+!urxvt.italicFont:
+!urxvt.boldItalicFont:
+urxvt.letterSpace: -1
+urxvt.intensityStyles: false
+
+
+! scrollbar
+urxvt.scrollBar: true
+urxvt.scrollBar_right: true
+urxvt.scrollstyle: plain
+urxvt.thickness: 5
+
+
+! fading
+urxvt.fading: 25
+urxvt.fadeColor: #000000

@@ -1,0 +1,16 @@
+! colors
+!#include "dotfiles/x/colors/solarized_dark"
+#include "dotfiles/x/colors/base16_default_dark"
+
+! urxvt
+#include "dotfiles/x/xres/urxvt"
+
+! Xft
+! investigate
+!xft.antialias: true
+!xft.autohint:  false
+!xft.dpi:  false
+!xft.hinting:   true
+!xft.hintstyle: hintslight
+!xft.lcdfilter: lcddefault
+!xft.rgba: rbg 

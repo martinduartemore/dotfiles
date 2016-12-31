@@ -30,15 +30,19 @@ get_os()
 
 symlink_file()
 {
-    print_info "Attempting to symlink \"${1}\"\n"
-    local src="${dotfiles_dir}/${1}"
-    local dst="${HOME}/.${1}"
+    local src_name="${1}"
+    local src_path="${dotfiles_dir}/${src_name}"
+    local dst_path="${HOME}/.${src_name}"
 
-    print_info "Deleting ${dst}\n"
-    rm -rf "${dst}"
+    print_info "${src_path}\n"
 
-    print_info "Copying ${src} to ${dst}\n"
-    ln -s "${src}" "${dst}"
+    print_info "    Deleting ${dst_path}\n"
+    rm -rf "${dst_path}"
+
+    print_info "    Linking ${src_path} to ${dst_path}\n"
+    ln -s "${src_path}" "${dst_path}"
+
+    print_success "    ${src_path} --> ${dst_path}\n"
 }
 
 
@@ -56,7 +60,11 @@ main()
     symlink_file "bashrc"
     symlink_file "bash_profile"
 
+    symlink_file "Xresources"
+    symlink_file "urxvt"
+
     print_success "Done installing dotfiles!\n"
 }
+
 
 main "${@}"
