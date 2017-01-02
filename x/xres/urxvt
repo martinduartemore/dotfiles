@@ -35,9 +35,7 @@ urxvt.keysym.Control-slash: perl:font-size:show
 urxvt.keysym.Control-Shift-C:       perl:clipboard:copy
 urxvt.keysym.Control-Shift-V:       perl:clipboard:paste
 urxvt.keysym.Control-Shift-Meta-V:  perl:clipboard:paste_escaped
-! default is xsel -ib
 urxvt.clipboard.copycmd:  xclip -i -selection clipboard
-! default is xsel -ob
 urxvt.clipboard.pastecmd: xclip -o -selection clipboard
 
 
