@@ -1,10 +1,10 @@
 # .bashrc
 
 # enable 256 colors support
-if [[ ${TERM} == @(screen|tmux|xterm) ]]; then
-    export OLD_TERM="${TERM}"
-    export TERM="${TERM}-256color"
-fi
+#if [[ ${TERM} == @(screen|tmux|xterm) ]]; then
+#    export OLD_TERM="${TERM}"
+#    export TERM="${TERM}-256color"
+#fi
 
 
 # protection against non-interactive, remote shells
