@@ -5,3 +5,4 @@ My personal dotfiles
 * Text editor: `vim`
 * Shell: `bash`
 * Terminal emulator: `urxvt`
+* Terminal multiplexer: `tmux`
