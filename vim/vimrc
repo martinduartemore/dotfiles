@@ -10,6 +10,9 @@ filetype indent on      " enable indentation files
 
 set mouse=a             " enable mouse support
 
+"set clipboard=          " make vim use X's clipboards when copying/pasting
+set clipboard^=unnamed,unnamedplus
+
 """""""""""""""""""""""""""""
 " VIM User Interface
 """""""""""""""""""""""""""""
@@ -45,10 +48,10 @@ set mat=2               " blink matching brackets (tenths of seconds)
 " Backups and temp files
 set history=1000        " expand history of commands
 set undofile            " enable undo file
+set undoreload=1000     " how many undos to load
 set undodir=~/.vim/tmp/undo//
 set backupdir=~/.vim/tmp/backup//
 set directory=~/.vim/tmp/swap//
-set undoreload=1000     "
 
 
 """""""""""""""""""""""""""""
@@ -188,7 +191,7 @@ endfunction
 " Misc
 """""""""""""""""""""""""""""
 
-" autoload vimrc
+" reload vimrc everytime it is overwritten
 augroup reload_vimrc
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
