@@ -1,6 +1,8 @@
 ! urxvt Xresources configurations
 
-! general
+!----------------------------
+! General
+!----------------------------
 !urxvt.termName: 
 !urxvt.iconFile: 
 urxvt.depth: 32
@@ -10,7 +12,9 @@ urxvt.iso14755: false
 urxvt.iso14755_52: false
 
 
-! extensions
+!----------------------------
+! Extensions
+!----------------------------
 ! more paths to search for scripts (~/.urxvt/ext/ is also default)
 urxvt.perl-lib: /usr/lib/urxvt/perl
 urxvt.perl-ext-common: default,matcher,fullscreen,font-size,clipboard
@@ -39,8 +43,10 @@ urxvt.clipboard.copycmd:  xclip -i -selection clipboard
 urxvt.clipboard.pastecmd: xclip -o -selection clipboard
 
 
-! font
-urxvt.font: xft:monospace:size=12
+!----------------------------
+! Font
+!----------------------------
+urxvt.font: xft:inconsolata:size=12,xft:monospace:size=12
 !urxvt.boldFont:
 !urxvt.italicFont:
 !urxvt.boldItalicFont:
@@ -48,13 +54,17 @@ urxvt.letterSpace: -1
 urxvt.intensityStyles: false
 
 
-! scrollbar
+!----------------------------
+! Scrollbar
+!----------------------------
 urxvt.scrollBar: true
 urxvt.scrollBar_right: true
 urxvt.scrollstyle: plain
 urxvt.thickness: 5
 
 
-! fading
+!----------------------------
+! Fading
+!----------------------------
 urxvt.fading: 25
 urxvt.fadeColor: #000000
