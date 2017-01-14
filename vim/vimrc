@@ -119,7 +119,7 @@ set laststatus=2        " always show the status line
 " Status line formatting
 set statusline=
 set statusline+=%y      " File type
-set statusline+=%.20F   " Full path to the file
+set statusline+=%.40F   " Full path to the file
 set statusline+=%m      " Modified flag
 set statusline+=%=      " Switch to right side
 set statusline+=%l      " Current line
