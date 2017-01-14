@@ -58,6 +58,7 @@ main()
     print_header "Symlinking files...\n"
     symlink_file "bashrc"
     symlink_file "bash_profile"
+    symlink_file "scripts"
     symlink_file "tmux.conf"
     symlink_file "urxvt"
     symlink_file "vim"
