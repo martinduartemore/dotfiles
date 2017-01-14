@@ -46,7 +46,7 @@ urxvt.clipboard.pastecmd: xclip -o -selection clipboard
 !----------------------------
 ! Font
 !----------------------------
-urxvt.font: xft:inconsolata:size=12,xft:monospace:size=12
+urxvt.font: xft:inconsolata:size=14,xft:monospace:size=12
 !urxvt.boldFont:
 !urxvt.italicFont:
 !urxvt.boldItalicFont:
