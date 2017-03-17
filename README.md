@@ -14,3 +14,8 @@ My personal dotfiles
   (clipboard & xterm_clipboard). If your vim installation does not have these
   features enabled, search for a vim package that has clipboard support enabled
   (e.g.: `vim-gnome`).
+
+
+## Dependencies
+* xclip: copy&paste from terminal
+* xmctrl: fullscreen toggle support
