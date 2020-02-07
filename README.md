@@ -11,9 +11,7 @@ My personal dotfiles
 
 ## Notes
 * *vim*: Make sure to check your vim installation for X11 clipboard support
-  (clipboard & xterm_clipboard). If your vim installation does not have these
-  features enabled, search for a vim package that has clipboard support enabled
-  (e.g.: `vim-gnome`).
+  (+clipboard & +xterm_clipboard).
 
 
 ## Dependencies

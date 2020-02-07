@@ -57,7 +57,7 @@ urxvt.intensityStyles: false
 !----------------------------
 ! Scrollbar
 !----------------------------
-urxvt.scrollBar: true
+urxvt.scrollBar: false
 urxvt.scrollBar_right: true
 urxvt.scrollstyle: plain
 urxvt.thickness: 5

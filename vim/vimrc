@@ -1,4 +1,28 @@
 """""""""""""""""""""""""""""
+" Plugins
+"""""""""""""""""""""""""""""
+" automatically download vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clang-completer'}
+call plug#end()
+
+" To fix gutter stutter on YouCompleteMe diagnostics
+"set signcolumn=yes
+" Alternatively, disable diagnostics
+"let g:ycm_enable_diagnostics_signs = 0
+"let g:ycm_enable_diagnostics_highlighting = 0
+"
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+
+"""""""""""""""""""""""""""""
 " General
 """""""""""""""""""""""""""""
 
@@ -12,6 +36,7 @@ set mouse=a             " enable mouse support
 
 "set clipboard=          " make vim use X's clipboards when copying/pasting
 set clipboard^=unnamed,unnamedplus
+
 
 """""""""""""""""""""""""""""
 " VIM User Interface
@@ -32,8 +57,11 @@ set wildignore+=.git
 set wildignore+=*.o,*.obj,*.exe,*.dll
 set wildignore+=*~,*.pyc
 
-" Ignore swap files in netwr
+" Ignore swap files in netrw
 let g:netrw_list_hide='.*\.swp$'
+
+" Set netrw tree mode
+let g:netrw_liststyle=3
 
 set ruler               " show the current position
 set number              " show line numbers
@@ -106,7 +134,7 @@ set listchars+=precedes:‹,extends:›
 " Enable folding
 "set foldmethod=indent  " fold based on indent
 set foldmethod=marker   " fold based on markers
-set foldnestmax=3       " deepest gold is 3 levels
+set foldnestmax=3       " deepest fold is 3 levels
 set nofoldenable        " dont fold by default
 
 
@@ -127,7 +155,6 @@ set statusline+=/       " Separator
 set statusline+=%L      " Total lines
 set statusline+=%4v     " Virtual column number
 set statusline+=%4p%%   " Percentage through file
-
 
 
 """""""""""""""""""""""""""""
@@ -199,3 +226,54 @@ augroup END
 
 " resize splits if the window size changes
 autocmd VimResized * exe "normal! \<c-w>="
+
+" automatically comment multiple selected lines
+let s:comment_map = { 
+    \   "c": '\/\/',
+    \   "cpp": '\/\/',
+    \   "go": '\/\/',
+    \   "java": '\/\/',
+    \   "javascript": '\/\/',
+    \   "lua": '--',
+    \   "scala": '\/\/',
+    \   "php": '\/\/',
+    \   "python": '#',
+    \   "ruby": '#',
+    \   "rust": '\/\/',
+    \   "sh": '#',
+    \   "desktop": '#',
+    \   "fstab": '#',
+    \   "conf": '#',
+    \   "profile": '#',
+    \   "bashrc": '#',
+    \   "bash_profile": '#',
+    \   "mail": '>',
+    \   "eml": '>',
+    \   "bat": 'REM',
+    \   "ahk": ';',
+    \   "vim": '"',
+    \   "tex": '%',
+    \ }
+
+
+function! ToggleComment()
+    if has_key(s:comment_map, &filetype)
+        let comment_leader = s:comment_map[&filetype]
+        if getline('.') =~ '^\s*$'
+            " Skip empty line
+            return
+        endif
+        if getline('.') =~ '^\s*' . comment_leader
+            " Uncomment the line
+            execute 'silent s/\v\s*\zs' . comment_leader . '\s*\ze//'
+        else
+            " Comment the line
+            execute 'silent s/\v^(\s*)/\1' . comment_leader . ' /'
+        endif
+    else
+        echo "No comment leader found for filetype"
+    endif
+endfunction
+
+nnoremap <leader><Space> :call ToggleComment()<cr>
+vnoremap <leader><Space> :call ToggleComment()<cr>

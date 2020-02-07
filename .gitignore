@@ -2,3 +2,5 @@
 *.swp
 vim/.netrwhist
 vim/tmp/*
+vim/autoload/*
+vim/plugged/*
