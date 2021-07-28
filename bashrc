@@ -32,3 +32,12 @@ source ~/dotfiles/bash/functions
 
 # prompt
 source ~/dotfiles/bash/prompt
+
+# exports
+source ~/dotfiles/bash/exports
+
+# scripts
+PATH="${PATH}:${HOME}/.scripts"
+
+# user-specific additions
+source ~/dotfiles/bash/custom
