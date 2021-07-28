@@ -9,7 +9,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'ycm-core/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'ycm-core/YouCompleteMe', {'do': 'python3 install.py --clang-completer'}
 call plug#end()
 
 " To fix gutter stutter on YouCompleteMe diagnostics
