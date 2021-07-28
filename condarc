@@ -1,0 +1,6 @@
+envs_dirs:
+  - ~/conda_venv
+
+env_prompt: '({name}) '
+
+auto_activate_base: false
