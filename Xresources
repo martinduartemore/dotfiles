@@ -1,6 +1,7 @@
 ! colors
-!#include "dotfiles/x/colors/solarized_dark"
-#include "dotfiles/x/colors/base16_default_dark"
+! #include "dotfiles/x/colors/solarized_dark"
+! #include "dotfiles/x/colors/base16_default_dark"
+#include "dotfiles/x/colors/base16_onedark"
 
 ! urxvt
 #include "dotfiles/x/xres/urxvt"
