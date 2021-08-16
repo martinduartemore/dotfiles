@@ -99,7 +99,8 @@ set background=dark     " background color
 
 " Set colorscheme
 "colorscheme solarized
-colorscheme base16-default-dark
+" colorscheme base16-default-dark
+colorscheme base16-ocean
 
 
 """""""""""""""""""""""""""""

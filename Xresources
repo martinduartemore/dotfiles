@@ -1,7 +1,8 @@
 ! colors
 ! #include "dotfiles/x/colors/solarized_dark"
 ! #include "dotfiles/x/colors/base16_default_dark"
-#include "dotfiles/x/colors/base16_onedark"
+! #include "dotfiles/x/colors/base16_onedark"
+#include "dotfiles/x/colors/base16_ocean"
 
 ! urxvt
 #include "dotfiles/x/xres/urxvt"
@@ -14,4 +15,4 @@
 !xft.hinting:   true
 !xft.hintstyle: hintslight
 !xft.lcdfilter: lcddefault
-!xft.rgba: rbg 
+!xft.rgba: rbg
