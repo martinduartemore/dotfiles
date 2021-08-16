@@ -1,8 +1,9 @@
 ! colors
-! #include "dotfiles/x/colors/solarized_dark"
-! #include "dotfiles/x/colors/base16_default_dark"
-! #include "dotfiles/x/colors/base16_onedark"
-#include "dotfiles/x/colors/base16_ocean"
+! #include "dotfiles/x/colors/base16-default-dark"
+! #include "dotfiles/x/colors/base16-nord"
+! #include "dotfiles/x/colors/base16-ocean"
+! #include "dotfiles/x/colors/base16-oceanicnext"
+#include "dotfiles/x/colors/base16-onedark"
 
 ! urxvt
 #include "dotfiles/x/xres/urxvt"

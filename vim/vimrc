@@ -98,9 +98,11 @@ set t_Co=16             " use 16 colors (ANSI colors)
 set background=dark     " background color
 
 " Set colorscheme
-"colorscheme solarized
-" colorscheme base16-default-dark
-colorscheme base16-ocean
+" colorscheme base17-default-dark
+" colorscheme base16-nord
+" colorscheme base16-ocean
+" colorscheme base16-oceanicnext
+colorscheme base16-onedark
 
 
 """""""""""""""""""""""""""""
