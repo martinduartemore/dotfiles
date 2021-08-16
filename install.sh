@@ -63,6 +63,7 @@ main()
     symlink_file "urxvt"
     symlink_file "vim"
     symlink_file "Xresources"
+    symlink_file "local/share/fonts"
 
     print_success "Done installing dotfiles!\n"
 }
