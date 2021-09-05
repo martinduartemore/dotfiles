@@ -1,8 +1,8 @@
 # vim
 *.swp
-bash/custom
 vim/.netrwhist
 vim/tmp/*
 vim/autoload/*
 vim/plugged/*
 local/share/fonts/*
+bash/custom
