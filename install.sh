@@ -64,6 +64,8 @@ main()
     symlink_file "vim"
     symlink_file "Xresources"
     symlink_file "local/share/fonts"
+    symlink_file "condarc"
+    symlink_file "tmuxp"
 
     print_success "Done installing dotfiles!\n"
 }

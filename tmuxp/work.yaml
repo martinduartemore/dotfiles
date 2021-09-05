@@ -1,0 +1,23 @@
+session_name: work
+start_directory: "${PWD}"
+
+windows:
+    - window_name: run
+      focus: true
+      layout: 2f36,168x43,0,0{84x43,0,0,7,83x43,85,0,14}
+      panes:
+          - shell_command:
+              - pane
+            focus: true
+          - pane
+
+    - window_name: editor
+      panes:
+          - vim
+
+    - window_name: monitor
+      layout: fb67,168x43,0,0{84x43,0,0[84x31,0,0,2,84x11,0,32,4],83x43,85,0,3}
+      panes:
+          - watch nvidia-smi
+          - watch query_gpu_processes.sh
+          - htop
