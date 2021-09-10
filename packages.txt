@@ -10,5 +10,6 @@ python3
 python3-dev
 rxvt-unicode-256color
 tmux
+tmuxp
 vim-gtk
 xclip
