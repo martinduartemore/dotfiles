@@ -67,9 +67,6 @@ main()
     symlink_file "condarc"
     symlink_file "tmuxp"
 
-    print_header "Installing apt packages...\n"
-    xargs --arg-file packages.txt sudo apt install -y
-
     print_success "Done installing dotfiles!\n"
 }
 
