@@ -4,6 +4,7 @@ cmake
 curl
 ffmpeg
 git
+htop
 okular
 perl
 python3
