@@ -66,6 +66,7 @@ main()
     symlink_file "local/share/fonts"
     symlink_file "condarc"
     symlink_file "tmuxp"
+    symlink_file "config/wezterm"
 
     print_success "Done installing dotfiles!\n"
 }
