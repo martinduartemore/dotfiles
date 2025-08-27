@@ -67,6 +67,7 @@ main()
     symlink_file "condarc"
     symlink_file "tmuxp"
     symlink_file "config/wezterm"
+    symlink_file "config/nvim"
 
     print_success "Done installing dotfiles!\n"
 }
