@@ -3,7 +3,10 @@ local config = wezterm.config_builder()
 
 -- Font
 config.font_size = 13
-config.font = wezterm.font("Source Code Pro")
+config.font = wezterm.font_with_fallback({
+    "Source Code Pro",
+    { family = "Symbols Nerd Font Mono", scale=1.0 },
+})
 
 -- Colors
 config.color_scheme = 'OneDark (base16)'
