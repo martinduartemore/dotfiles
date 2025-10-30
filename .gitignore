@@ -4,5 +4,12 @@ vim/.netrwhist
 vim/tmp/*
 vim/autoload/*
 vim/plugged/*
+
+# fonts
 local/share/fonts/*
+
+# bash
 bash/custom
+
+# macos
+.DS_Store

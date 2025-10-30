@@ -1,0 +1,40 @@
+# easier navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# grep settings: prefer GNU grep when available (ggrep installed via coreutils on macOS)
+if command -v ggrep >/dev/null 2>&1; then
+	alias grep='ggrep --color=auto'
+	alias egrep='ggrep -E --color=auto'
+	alias fgrep='ggrep -F --color=auto'
+else
+	# if system grep supports --version it's likely GNU; otherwise fall back to plain grep
+	if grep --version >/dev/null 2>&1; then
+		alias grep='grep --color=auto'
+		alias egrep='egrep --color=auto'
+		alias fgrep='fgrep --color=auto'
+	else
+		alias grep='grep'
+		alias egrep='egrep'
+		alias fgrep='fgrep'
+	fi
+fi
+
+# ls settings: prefer GNU 'gls' (coreutils) on macOS if available, otherwise use appropriate flags per platform
+if command -v gls >/dev/null 2>&1; then
+	alias ls='gls -h --color=auto --group-directories-first'
+elif [ "$(uname)" = "Darwin" ]; then
+	# BSD ls: -G enables color, -h for human readable
+	alias ls='ls -hG'
+else
+	alias ls='ls -h --color=auto --group-directories-first'
+fi
+
+alias ll='ls -alhF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# move to workspace directory
+alias workspace='cd ~/workspace'

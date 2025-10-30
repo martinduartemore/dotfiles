@@ -17,4 +17,4 @@ query_gpu_processes()
     fi
 }
 
-query_gpu_processes ${@}
+query_gpu_processes "$@"
