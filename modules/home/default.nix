@@ -7,6 +7,7 @@
     ./ssh.nix
     ./packages.nix
     ./fonts.nix
+    ./gnome.nix
     ./tmux.nix
     ./neovim.nix
     ./wezterm.nix

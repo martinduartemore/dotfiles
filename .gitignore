@@ -17,3 +17,5 @@ bash/custom
 # nix
 result
 result-*
+# gnome dconf dump artifact
+gnome-settings.txt
