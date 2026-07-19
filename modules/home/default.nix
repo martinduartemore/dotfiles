@@ -4,6 +4,7 @@
     ./zsh.nix
     ./git.nix
     ./packages.nix
+    ./tmux.nix
   ];
 
   home.username = "martin";
