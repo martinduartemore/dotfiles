@@ -4,9 +4,7 @@ let
   clip = if pkgs.stdenv.isDarwin then "pbcopy" else "xclip -selection clipboard -i";
 in
 {
-  home.packages =
-    [ pkgs.tmuxp ]
-    ++ lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.xclip ];
+  home.packages = lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.xclip ];
 
   programs.tmux = {
     enable = true;

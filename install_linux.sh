@@ -37,8 +37,6 @@ main_linux()
     symlink_file "tmux.conf"
     symlink_file "vim"
     symlink_file "local/share/fonts"
-    symlink_file "condarc"
-    symlink_file "tmuxp"
     symlink_file "config/wezterm"
     symlink_file "config/nvim"
 
