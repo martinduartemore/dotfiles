@@ -1,73 +1,59 @@
 # dotfiles
 
-My personal dotfiles. macOS is managed declaratively with [nix-darwin] + [home-manager]
-via a Nix flake. Linux still uses the legacy `install.sh` symlink flow (migration in progress).
+My personal dotfiles, managed declaratively with [nix-darwin] + [home-manager] via a Nix flake.
+macOS uses nix-darwin; non-NixOS Linux uses standalone Home Manager. Both share `modules/home/*`.
 
 ## Structure
 
 ```
-flake.nix                 # inputs (nixpkgs, nix-darwin, home-manager) + outputs
+flake.nix                 # inputs + outputs (darwinConfigurations, homeConfigurations, checks)
+bootstrap.sh / rebuild.sh # install Nix + first switch / apply changes (auto-detect host + OS)
 hosts/
-  martins-macbook-pro/    # per-machine config; imports darwin + home modules
+  martins-macbook-pro/    # per-machine macOS config
 modules/
-  darwin/                 # macOS system: homebrew casks, system defaults, PATH
-  home/                   # portable home-manager: zsh, git, tmux, neovim, wezterm, packages, scripts
-config/nvim, config/wezterm   # editor/terminal configs (symlinked out-of-store so they stay editable)
-bash/, bashrc, ...        # bash config, still used on Linux via install.sh
+  darwin/                 # macOS system: homebrew casks, defaults, fonts, PATH
+  home/                   # portable home-manager: shells, git, tmux, neovim, wezterm,
+                          #   packages, scripts, fonts, gnome (dconf), ...
+config/{nvim,wezterm,tmux} # editor/terminal configs (symlinked to the repo, so they stay editable)
 ```
 
-`modules/home/*` is OS-agnostic; machine-specific values live in `hosts/`. Platform-specific
-bits use `pkgs.stdenv.isDarwin`.
+`modules/home/*` is OS-agnostic; platform-specific bits use `pkgs.stdenv.isDarwin`. macOS runs
+zsh, Linux runs bash — shared aliases live in `home.shellAliases`. Nix flavor: Determinate Nix on
+macOS, upstream Nix on Linux.
 
-## macOS
-
-Nix is installed via the [Determinate] installer (Determinate Nix), so nix-darwin runs with
-`nix.enable = false`. Homebrew is kept for GUI casks only; all CLI tooling lives in nix or [mise].
-
-Bootstrap a fresh machine:
+## Bootstrap a machine
 
 ```sh
-# 1. install Nix (Determinate)
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-
-# 2. clone
-git clone <repo> ~/dotfiles
-
-# 3. first activation
-sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ~/dotfiles#martins-macbook-pro
+git clone git@github.com:martinduartemore/dotfiles.git ~/dotfiles
+cd ~/dotfiles && ./bootstrap.sh          # installs Nix, runs the first switch
 ```
 
-Apply changes after that:
+Pass a hostname to target another machine: `./bootstrap.sh <hostname>`.
+
+## Apply changes
 
 ```sh
-sudo darwin-rebuild switch --flake ~/dotfiles
+./rebuild.sh                             # sudo darwin-rebuild (macOS) / home-manager switch (Linux)
 ```
 
-Validate without activating: `darwin-rebuild build --flake ~/dotfiles#martins-macbook-pro`.
+Validate without activating: `darwin-rebuild build --flake .#<host>` /
+`nix build .#homeConfigurations."martin@<host>".activationPackage`.
 
-### Adding config
+## Adding config
 
-Edit the relevant `modules/home/*.nix` and re-run `darwin-rebuild switch`:
+Edit the relevant `modules/home/*.nix` and `./rebuild.sh`:
 
 | What | Where |
 |------|-------|
 | env var | `home.sessionVariables` |
 | PATH entry | `home.sessionPath` |
-| alias | `programs.zsh.shellAliases` |
-| shell snippet | `programs.zsh.initContent` |
+| alias | `home.shellAliases` |
+| shell snippet | `programs.{zsh,bash}` |
 
-For quick throwaway tweaks that shouldn't be committed, drop them in `~/.zshrc.local`
-(sourced automatically, no rebuild).
+For quick throwaway tweaks without a rebuild, use the scratch files:
+`~/.zshrc.local`, `~/.bashrc.local`, `~/.config/tmux/local.conf`.
 
-## Linux
-
-Still on the legacy installer until it's migrated to home-manager:
-
-```sh
-./install.sh
-```
+Formatting/lint run via a pre-commit hook (`nix develop` to install it) and in CI.
 
 [nix-darwin]: https://github.com/nix-darwin/nix-darwin
 [home-manager]: https://github.com/nix-community/home-manager
-[Determinate]: https://github.com/DeterminateSystems/nix-installer
-[mise]: https://mise.jdx.dev

@@ -55,7 +55,7 @@ first_switch() {
   local os="$1" target="$2" flake="$3"
   case "$os" in
     darwin) sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake "${flake}#${target}" ;;
-    linux) nix run home-manager/master -- switch --flake "${flake}#${target}" ;;
+    linux) nix run home-manager/master -- switch -b backup --flake "${flake}#${target}" ;;
   esac
 }
 

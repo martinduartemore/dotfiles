@@ -13,7 +13,7 @@ rebuild() {
   local os="$1" target="$2" flake="$3"
   case "$os" in
     darwin) sudo darwin-rebuild switch --flake "${flake}#${target}" ;;
-    linux) home-manager switch --flake "${flake}#${target}" ;;
+    linux) home-manager switch -b backup --flake "${flake}#${target}" ;;
   esac
 }
 
