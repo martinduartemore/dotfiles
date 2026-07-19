@@ -5,7 +5,13 @@
   ...
 }:
 {
-  home.packages = [ pkgs.tmux ] ++ lib.optionals (!pkgs.stdenv.isDarwin) [ pkgs.xclip ];
+  home.packages = [
+    pkgs.tmux
+  ]
+  ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+    pkgs.wl-clipboard
+    pkgs.xclip
+  ];
 
   # Out-of-store symlink so the config stays editable (edit + prefix-r to reload).
   xdg.configFile."tmux/tmux.conf".source =

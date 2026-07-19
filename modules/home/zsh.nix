@@ -22,24 +22,6 @@
       ];
     };
 
-    shellAliases = {
-      ".." = "cd ..";
-      "..." = "cd ../..";
-      "...." = "cd ../../..";
-      "....." = "cd ../../../..";
-
-      ls = "ls --color=auto --group-directories-first -h";
-      grep = "grep --color=auto";
-      egrep = "grep -E --color=auto";
-      fgrep = "grep -F --color=auto";
-
-      ll = "ls -alhF";
-      la = "ls -A";
-      l = "ls -CF";
-
-      workspace = "cd ~/workspace";
-    };
-
     initContent = ''
       setopt HIST_REDUCE_BLANKS
       bindkey '^R' history-incremental-search-backward
@@ -65,6 +47,26 @@
   programs.mise = {
     enable = true;
     enableZshIntegration = true;
+    enableBashIntegration = true;
+  };
+
+  # Shared across shells (zsh + bash).
+  home.shellAliases = {
+    ".." = "cd ..";
+    "..." = "cd ../..";
+    "...." = "cd ../../..";
+    "....." = "cd ../../../..";
+
+    ls = "ls --color=auto --group-directories-first -h";
+    grep = "grep --color=auto";
+    egrep = "grep -E --color=auto";
+    fgrep = "grep -F --color=auto";
+
+    ll = "ls -alhF";
+    la = "ls -A";
+    l = "ls -CF";
+
+    workspace = "cd ~/workspace";
   };
 
   home.sessionVariables = {
