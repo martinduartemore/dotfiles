@@ -76,6 +76,10 @@
             };
             statix.enable = true;
             deadnix.enable = true;
+            shellcheck = {
+              enable = true;
+              files = "^(bootstrap|rebuild|lib)\\.sh$";
+            };
           };
         };
       });
