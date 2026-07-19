@@ -5,6 +5,7 @@
     ./git.nix
     ./ssh.nix
     ./packages.nix
+    ./fonts.nix
     ./tmux.nix
     ./neovim.nix
     ./wezterm.nix
