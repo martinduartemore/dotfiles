@@ -67,6 +67,8 @@
     l = "ls -CF";
 
     workspace = "cd ~/workspace";
+
+    claude-personal = "CLAUDE_CONFIG_DIR=$HOME/.claude-personal/claude claude";
   };
 
   home.sessionVariables = {
