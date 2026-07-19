@@ -18,13 +18,41 @@ in
     escapeTime = 0;
     historyLimit = 10000;
     mouse = true;
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
 
     extraConfig = ''
+      set -sa terminal-overrides ",*:RGB"
+
       set -g status-keys vi
       set -g display-time 2000
-      set -g status on
-      set -g status-interval 1
+      set -g status-interval 5
+      set -g renumber-windows on
+
+      # name windows after the current dir; don't let programs rename them
+      setw -g allow-rename off
+      setw -g automatic-rename on
+      setw -g automatic-rename-format "#{b:pane_current_path}"
+
+      # minimalist dotbar-style: transparent bg, centered windows, dim/bright contrast
+      set -g status-position bottom
+      set -g status-justify absolute-centre
+      set -g status-style "bg=#2c313c,fg=colour8"
+      set -g status-left-length 100
+      set -g status-right-length 100
+      set -g status-left "#[fg=#{?client_prefix,colour4,colour8}] #S #[default]"
+      set -g window-status-style "fg=colour8"
+      set -g window-status-current-style "fg=colour7"
+      set -g window-status-separator " • "
+      set -g window-status-format "#W"
+      set -g window-status-current-format "#W"
+      set -g window-status-activity-style "fg=colour3"
+      set -g status-right "#[fg=colour8]%H:%M "
+      set -g pane-border-style "fg=colour8"
+      set -g pane-active-border-style "fg=colour7"
+      set -g message-style "bg=default,fg=colour7"
+      set -g message-command-style "bg=default,fg=colour7"
+      set -g mode-style "bg=colour8,fg=default"
+      set -g clock-mode-colour colour4
 
       bind-key | split-window -h -c '#{pane_current_path}'
       bind-key - split-window -v -c '#{pane_current_path}'
