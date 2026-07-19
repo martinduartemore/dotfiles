@@ -30,6 +30,8 @@ enable_flakes() {
 
 install_nix() {
   local os="$1"
+  # Nix may be installed but not yet on this shell's PATH (fresh install).
+  load_nix_profile
   if command -v nix >/dev/null 2>&1; then
     log "Nix already installed."
     return
