@@ -1,11 +1,10 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./zsh.nix
     ./git.nix
     ./ssh.nix
     ./packages.nix
-    ./agents.nix
     ./tmux.nix
     ./neovim.nix
     ./wezterm.nix
@@ -13,7 +12,7 @@
   ];
 
   home.username = "martin";
-  home.homeDirectory = "/Users/martin";
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/martin" else "/home/martin";
   programs.home-manager.enable = true;
 
   # Don't change after the first switch.

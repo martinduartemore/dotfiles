@@ -52,6 +52,16 @@
         ];
       };
 
+      # Standalone Home Manager for non-NixOS Linux.
+      #   home-manager switch --flake ~/dotfiles#martin@martin-desktop
+      homeConfigurations."martin@martin-desktop" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+        modules = [ ./modules/home ];
+      };
+
       formatter = forAllSystems (system: treefmtEval.${system}.config.build.wrapper);
 
       checks = forAllSystems (system: {
