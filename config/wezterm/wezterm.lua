@@ -10,8 +10,8 @@ config.font = wezterm.font_with_fallback({
 })
 
 -- Colors
-config.color_scheme = 'OneDark (base16)'
--- config.color_scheme = 'rose-pine-moon'
+-- config.color_scheme = 'OneDark (base16)'
+config.color_scheme = 'Tokyo Night Storm (Gogh)'
 
 -- Appearance
 config.window_padding = {
@@ -20,8 +20,9 @@ config.window_padding = {
     top = 0,
     bottom = 0,
 }
-config.use_fancy_tab_bar = true
-config.window_background_opacity = 0.95
+config.enable_tab_bar = false
+config.window_decorations = "RESIZE"
+config.window_background_opacity = 0.8
 config.macos_window_background_blur = 50
 
 
