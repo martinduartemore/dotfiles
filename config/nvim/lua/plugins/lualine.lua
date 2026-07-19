@@ -3,7 +3,7 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     require("lualine").setup({
-      theme = "catppuccin-mocha"
+      theme = "tokyonight"
     })
   end
 }
