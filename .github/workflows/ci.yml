@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  checks:
+    name: format + lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - run: nix build .#checks.x86_64-linux.formatting .#checks.x86_64-linux.pre-commit -L
+
+  darwin:
+    name: build darwin config
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - run: nix build .#darwinConfigurations.martins-macbook-pro.system -L

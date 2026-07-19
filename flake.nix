@@ -13,6 +13,16 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -21,7 +31,18 @@
       nixpkgs,
       nix-darwin,
       home-manager,
+      treefmt-nix,
+      git-hooks,
     }:
+    let
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "aarch64-darwin"
+        "x86_64-linux"
+      ];
+      treefmtEval = forAllSystems (
+        system: treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} ./treefmt.nix
+      );
+    in
     {
       darwinConfigurations."martins-macbook-pro" = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit inputs; };
@@ -30,5 +51,30 @@
           home-manager.darwinModules.home-manager
         ];
       };
+
+      formatter = forAllSystems (system: treefmtEval.${system}.config.build.wrapper);
+
+      checks = forAllSystems (system: {
+        formatting = treefmtEval.${system}.config.build.check self;
+
+        pre-commit = git-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            treefmt = {
+              enable = true;
+              package = treefmtEval.${system}.config.build.wrapper;
+            };
+            statix.enable = true;
+            deadnix.enable = true;
+          };
+        };
+      });
+
+      devShells = forAllSystems (system: {
+        default = nixpkgs.legacyPackages.${system}.mkShell {
+          inherit (self.checks.${system}.pre-commit) shellHook;
+          buildInputs = self.checks.${system}.pre-commit.enabledPackages;
+        };
+      });
     };
 }
