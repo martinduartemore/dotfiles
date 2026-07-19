@@ -1,6 +1,5 @@
 { pkgs, lib, ... }:
 {
-  # GNU coreutils/grep so `ls`/`grep` match the old ggrep/gls behaviour.
   home.packages = with pkgs; [
     coreutils
     gnugrep
@@ -49,15 +48,15 @@
       PROMPT+='λ '
 
       [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+      [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
     '';
 
-    # OrbStack integration (was in ~/.zprofile).
     profileExtra = ''
       source ~/.orbstack/shell/init.zsh 2>/dev/null || :
     '';
   };
 
-  # Replaces manual mise activation and nvm. node lives in mise: `mise use -g node@24`.
   programs.mise = {
     enable = true;
     enableZshIntegration = true;
@@ -74,6 +73,6 @@
     "$HOME/.local/bin"
     "$HOME/.scripts"
     "$HOME/.bun/bin"
-    "$HOME/.cargo/bin" # rustup (was `. ~/.cargo/env` in ~/.zshenv)
+    "$HOME/.cargo/bin"
   ];
 }

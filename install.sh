@@ -18,14 +18,9 @@ main()
 
     case "${os}" in
         macos)
-            if [[ -f "${dotfiles_dir}/install_mac.sh" ]]; then
-                # shellcheck source=/dev/null
-                source "${dotfiles_dir}/install_mac.sh"
-                main_mac "$@"
-            else
-                print_error "macOS installer (install_mac.sh) not found.\n"
-                exit 1
-            fi
+            print_info "macOS is managed by nix-darwin — see flake.nix.\n"
+            print_info "Run: sudo darwin-rebuild switch --flake ~/dotfiles\n"
+            exit 0
             ;;
         linux)
             if [[ -f "${dotfiles_dir}/install_linux.sh" ]]; then
