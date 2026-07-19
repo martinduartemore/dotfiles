@@ -70,6 +70,9 @@ in
       bind X kill-session
       bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded configuration file."
       bind / list-keys
+
+      # scratch space for quick tweaks without a rebuild: edit it, then prefix-r
+      source-file -q ~/.config/tmux/local.conf
     '';
   };
 }
