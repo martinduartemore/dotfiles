@@ -1,5 +1,7 @@
 { lib, ... }:
 {
+  imports = [ ./homebrew.nix ];
+
   # Determinate Nix manages the daemon and nix.conf; nix-darwin must not.
   nix.enable = false;
 
