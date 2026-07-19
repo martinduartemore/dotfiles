@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     coreutils
@@ -16,7 +16,10 @@
       share = true;
       extended = true;
       ignoreAllDups = true;
-      ignorePatterns = [ "ls" "cd" ];
+      ignorePatterns = [
+        "ls"
+        "cd"
+      ];
     };
 
     shellAliases = {
@@ -66,9 +69,6 @@
 
   home.sessionVariables = {
     BUN_INSTALL = "$HOME/.bun";
-  }
-  // lib.optionalAttrs pkgs.stdenv.isDarwin {
-    SSH_AUTH_SOCK = "/Users/martin/.bitwarden-ssh-agent.sock";
   };
 
   home.sessionPath = [

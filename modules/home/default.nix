@@ -3,7 +3,9 @@
   imports = [
     ./zsh.nix
     ./git.nix
+    ./ssh.nix
     ./packages.nix
+    ./agents.nix
     ./tmux.nix
     ./neovim.nix
     ./wezterm.nix
