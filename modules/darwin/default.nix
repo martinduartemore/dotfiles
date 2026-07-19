@@ -3,6 +3,7 @@
   imports = [
     ./homebrew.nix
     ./system-defaults.nix
+    ./fonts.nix
   ];
 
   # Determinate Nix manages the daemon and nix.conf; nix-darwin must not.

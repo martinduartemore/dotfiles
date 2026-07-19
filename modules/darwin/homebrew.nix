@@ -15,7 +15,6 @@
       "discord"
       "ente-auth"
       "firefox"
-      "font-fira-code"
       "google-chrome"
       "handy"
       "iterm2"
