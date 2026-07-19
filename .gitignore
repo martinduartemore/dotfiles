@@ -13,3 +13,7 @@ bash/custom
 
 # macos
 .DS_Store
+
+# nix
+result
+result-*
