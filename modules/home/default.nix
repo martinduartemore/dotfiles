@@ -5,6 +5,7 @@
     ./git.nix
     ./packages.nix
     ./tmux.nix
+    ./neovim.nix
   ];
 
   home.username = "martin";

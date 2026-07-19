@@ -64,8 +64,6 @@
   };
 
   home.sessionVariables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
     BUN_INSTALL = "$HOME/.bun";
   }
   // lib.optionalAttrs pkgs.stdenv.isDarwin {
