@@ -7,6 +7,7 @@
     ./tmux.nix
     ./neovim.nix
     ./wezterm.nix
+    ./scripts.nix
   ];
 
   home.username = "martin";

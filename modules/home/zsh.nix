@@ -71,7 +71,6 @@
 
   home.sessionPath = [
     "$HOME/.local/bin"
-    "$HOME/.scripts"
     "$HOME/.bun/bin"
     "$HOME/.cargo/bin"
   ];
