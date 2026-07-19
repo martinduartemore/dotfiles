@@ -1,6 +1,9 @@
 { ... }:
 {
-  imports = [ ./zsh.nix ];
+  imports = [
+    ./zsh.nix
+    ./git.nix
+  ];
 
   home.username = "martin";
   home.homeDirectory = "/Users/martin";
