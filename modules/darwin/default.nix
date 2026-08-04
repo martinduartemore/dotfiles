@@ -14,8 +14,14 @@
 
   # Keep Homebrew on PATH for casks and cask-provided CLIs, but after the nix
   # profile dirs so nix binaries always win.
+  #
+  # /Library/TeX/texbin is the MacTeX cask's bin dir. Apple ships it via
+  # /etc/paths.d/TeX, which only gets read by path_helper — and nix-darwin's
+  # generated /etc/zprofile drops the path_helper call, so /etc/paths.d is
+  # never applied. Add it explicitly instead.
   environment.systemPath = lib.mkAfter [
     "/opt/homebrew/bin"
     "/opt/homebrew/sbin"
+    "/Library/TeX/texbin"
   ];
 }
