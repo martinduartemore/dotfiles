@@ -12,6 +12,7 @@
     ./neovim.nix
     ./wezterm.nix
     ./scripts.nix
+    ./agents.nix
   ];
 
   home.username = "martin";
