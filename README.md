@@ -81,11 +81,16 @@ repo, [dotagents]. `modules/home/agents.nix` links that checkout into `~/.claude
 with out-of-store symlinks, so authoring an artifact takes effect immediately — no rebuild. Only
 adding a new *kind* of artifact (hooks, output styles) needs one.
 
-The checkout path is hardcoded in `agents.nix`; clone it there or the links dangle:
+Both hosts get the same links — the path is derived from `home.homeDirectory`, and `~/.claude` /
+`~/.codex` are identical on macOS and Linux. `bootstrap.sh` clones the repo; on a machine that
+predates it, or if the clone failed for want of SSH keys, do it by hand or the links dangle:
 
 ```sh
 git clone git@github.com:martinduartemore/dotagents.git ~/workspace/martinduartemore/dotagents
 ```
+
+The checkout is mutable and **not** pinned by the flake, so machines don't converge on their own —
+`git pull` in the checkout is what syncs an artifact across them. Nothing to rebuild afterwards.
 
 ## Platform notes
 

@@ -13,6 +13,8 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib.sh"
 
 readonly DETERMINATE_INSTALLER="https://install.determinate.systems/nix"
 readonly UPSTREAM_INSTALLER="https://nixos.org/nix/install"
+readonly DOTAGENTS_URL="git@github.com:martinduartemore/dotagents.git"
+readonly DOTAGENTS_PATH="${HOME}/workspace/martinduartemore/dotagents"
 
 load_nix_profile() {
   local profile=/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
@@ -50,6 +52,20 @@ install_nix() {
   load_nix_profile
 }
 
+# modules/home/agents.nix links this checkout into ~/.claude and ~/.codex, so
+# without it the first switch activates into dangling symlinks. Non-fatal: the
+# repo is private, and a fresh machine may not have SSH keys yet.
+clone_dotagents() {
+  if [[ -d "$DOTAGENTS_PATH" ]]; then
+    log "dotagents already cloned."
+    return
+  fi
+  log "Cloning dotagents..."
+  mkdir -p "$(dirname "$DOTAGENTS_PATH")"
+  git clone "$DOTAGENTS_URL" "$DOTAGENTS_PATH" ||
+    warn "dotagents clone failed; agent artifacts stay dangling until you clone it to ${DOTAGENTS_PATH}."
+}
+
 # First activation, before darwin-rebuild / home-manager are on PATH.
 first_switch() {
   local os="$1" target="$2" flake="$3"
@@ -66,6 +82,7 @@ main() {
   flake="$(repo_root)"
 
   install_nix "$os"
+  clone_dotagents
   log "Bootstrapping ${target} (${os})..."
   first_switch "$os" "$target" "$flake"
   log "Done. Use ./rebuild.sh for future changes."
