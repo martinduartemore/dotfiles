@@ -31,7 +31,7 @@ bash/{prompt,functions}      # bash fragments read into the generated ~/.bashrc
 ```
 
 `modules/home/` covers: `zsh`, `bash`, `git`, `ssh`, `tmux`, `neovim`, `wezterm`, `packages`,
-`scripts`, `fonts`, `gnome` (Linux dconf). Platform-specific bits are guarded with
+`scripts`, `fonts`, `agents`, `gnome` (Linux dconf). Platform-specific bits are guarded with
 `pkgs.stdenv.isDarwin`.
 
 ## Bootstrap a fresh machine
@@ -74,6 +74,19 @@ effect immediately (reload the app / `prefix-r`) — no rebuild. For quick throw
 tweaks, use the scratch files, which are sourced if present:
 `~/.zshrc.local`, `~/.bashrc.local`, `~/.config/tmux/local.conf`.
 
+## Agent artifacts
+
+Skills, prompts, subagents, and global instructions for Claude Code and Codex live in a separate
+repo, [dotagents]. `modules/home/agents.nix` links that checkout into `~/.claude` and `~/.codex`
+with out-of-store symlinks, so authoring an artifact takes effect immediately — no rebuild. Only
+adding a new *kind* of artifact (hooks, output styles) needs one.
+
+The checkout path is hardcoded in `agents.nix`; clone it there or the links dangle:
+
+```sh
+git clone git@github.com:martinduartemore/dotagents.git ~/workspace/martinduartemore/dotagents
+```
+
 ## Platform notes
 
 - **macOS** — GUI apps are Homebrew casks (managed by nix-darwin's `homebrew` module); all CLI
@@ -83,7 +96,7 @@ tweaks, use the scratch files, which are sourced if present:
   packages (`build-essential`, `clang`, drivers, …) are **not** nix-managed on non-NixOS — install
   those with `apt`.
 - **Agent CLIs** (claude, codex, opencode, pi) are managed outside nix (native installer / mise) so
-  they can update daily.
+  they can update daily. Their artifacts come from [dotagents] — see above.
 
 ## Quality
 
@@ -91,6 +104,7 @@ Formatting ([treefmt] + nixfmt) and linting (statix, deadnix, shellcheck) run as
 and in GitHub Actions CI. Install the hook locally with `nix develop`. Format everything with
 `nix fmt`.
 
+[dotagents]: https://github.com/martinduartemore/dotagents
 [nix-darwin]: https://github.com/nix-darwin/nix-darwin
 [home-manager]: https://github.com/nix-community/home-manager
 [mise]: https://mise.jdx.dev
