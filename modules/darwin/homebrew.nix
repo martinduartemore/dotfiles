@@ -28,6 +28,7 @@
       "raycast"
       "visual-studio-code"
       "wezterm"
+      "zotero"
     ];
   };
 }
