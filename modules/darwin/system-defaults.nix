@@ -51,6 +51,11 @@ in
       tilesize = 48;
       orientation = "bottom";
       show-recents = false;
+
+      # macOS has no per-Space Dock: every running app shows on every Space.
+      # Dropping the pinned-but-not-running tiles is the closest thing to a
+      # Dock that reflects what is actually open.
+      static-only = true;
     };
 
     finder = {
