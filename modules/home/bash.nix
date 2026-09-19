@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 # bash is the login shell on Linux; on macOS zsh is used instead.
-lib.mkIf (!pkgs.stdenv.isDarwin) {
+lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
   programs.bash = {
     enable = true;
 

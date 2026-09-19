@@ -8,7 +8,7 @@
   home.packages = [
     pkgs.tmux
   ]
-  ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+  ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [
     pkgs.wl-clipboard
     pkgs.xclip
   ];

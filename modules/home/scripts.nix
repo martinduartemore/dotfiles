@@ -14,6 +14,6 @@ in
       "weather"
     ]
     # Finder-only; there is nothing to reset on Linux.
-    ++ lib.optionals pkgs.stdenv.isDarwin [ "finder-reset-views.sh" ]
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ "finder-reset-views.sh" ]
   );
 }

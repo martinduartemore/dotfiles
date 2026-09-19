@@ -16,7 +16,7 @@
   ];
 
   home.username = "martin";
-  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/martin" else "/home/martin";
+  home.homeDirectory = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/martin" else "/home/martin";
   programs.home-manager.enable = true;
 
   # Don't change after the first switch.
