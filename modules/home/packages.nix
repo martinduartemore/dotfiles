@@ -7,6 +7,7 @@
     wget
 
     gh
+    git-annex
     awscli2
     terraform
     ffmpeg
