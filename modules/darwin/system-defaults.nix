@@ -143,6 +143,44 @@ in
       appearanceSize = "1";
       menubarIcon = "0";
     };
+
+    # Values read off the running machine, except the switcher's windowless
+    # apps and minimized placement. Left out: featureAvailable.*,
+    # onboarding and migration markers, and window geometry, which the app
+    # writes as state; audioPriority*, keyed by per-device UIDs;
+    # systemShortcutsSuppressed, the app's own record of the symbolic hotkeys
+    # it disabled for switcherTakeOverSystemShortcuts, which it needs in order
+    # to restore them.
+    CustomUserPreferences."com.vorssaint.utils" = {
+      autoQuitEnabled = true;
+      clamshellPreferred = false;
+      defaultDurationMinutes = 0;
+      dockClickMinimize = true;
+      dockPreviewCurrentSpaceOnly = true;
+      dockPreviewEnabled = true;
+      keepAwakeActiveIcon = "vorssaint";
+      keepAwakeIconTint = "orange";
+      keepAwakeMouseJiggleIntervalMinutes = 5;
+      monitorPwrTemperature = true;
+      notchLiquidGlassEnabled = false;
+      notchScratchpadControlHidden = true;
+      notchSize = "spacious";
+      scrollInverterHorizontalEnabled = false;
+      switcherCurrentDisplayOnly = false;
+      switcherCurrentSpaceOnly = true;
+      switcherEnabled = true;
+      switcherPreviewSize = "normal";
+      switcherTakeOverSystemShortcuts = true;
+      switcherWindowlessApps = "off";
+
+      # The only way to drop windows of hidden apps is to class them as
+      # minimized, so minimized windows are dropped along with them.
+      switcherMinimizedPlacement = "hidden";
+      switcherTreatHiddenAppsLikeMinimized = true;
+
+      windowLayoutShortcutsEnabled = true;
+      windowMaximizeEnabled = true;
+    };
   };
 
   # Per-folder view styles live as `vstl` records inside each parent's

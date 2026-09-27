@@ -27,6 +27,7 @@
       "orbstack"
       "raycast"
       "visual-studio-code"
+      "vorssaint"
       "wezterm"
       "zotero"
     ];
