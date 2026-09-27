@@ -140,6 +140,9 @@ in
       windowLayoutShortcutsEnabled = true;
       windowMaximizeEnabled = true;
     };
+
+    # The Defaults package stores enums JSON-encoded, quotes included.
+    CustomUserPreferences."com.lujjjh.LinearMouse".menuBarVisibilityMode = ''"never"'';
   };
 
   # Per-folder view styles live as `vstl` records inside each parent's
