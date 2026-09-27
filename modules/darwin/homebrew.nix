@@ -10,7 +10,6 @@
     };
 
     casks = [
-      "alt-tab"
       "bitwarden"
       "discord"
       "ente-auth"
