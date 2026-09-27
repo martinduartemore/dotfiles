@@ -9,6 +9,8 @@
       cleanup = "uninstall";
     };
 
+    taps = [ "fif7y/tap" ];
+
     casks = [
       "bitwarden"
       "discord"
@@ -17,13 +19,13 @@
       "google-chrome"
       "handy"
       "iterm2"
-      "jordanbaird-ice"
       "linearmouse"
       "mactex"
       "ngrok"
       "obs"
       "obsidian"
       "orbstack"
+      "fif7y/tap/pelmet"
       "raycast"
       "visual-studio-code"
       "vorssaint"
