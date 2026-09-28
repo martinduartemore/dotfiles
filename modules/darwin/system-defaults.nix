@@ -104,12 +104,13 @@ in
     };
 
     # Values read off the running machine, except the switcher's windowless
-    # apps and minimized placement. Left out: featureAvailable.*,
-    # onboarding and migration markers, and window geometry, which the app
-    # writes as state; audioPriority*, keyed by per-device UIDs;
-    # systemShortcutsSuppressed, the app's own record of the symbolic hotkeys
-    # it disabled for switcherTakeOverSystemShortcuts, which it needs in order
-    # to restore them.
+    # apps and minimized placement, and the maximizer, which turns the green
+    # button into a maximize and so blocks native full screen. Left out:
+    # featureAvailable.*, onboarding and migration markers, and window
+    # geometry, which the app writes as state; audioPriority*, keyed by
+    # per-device UIDs; systemShortcutsSuppressed, the app's own record of the
+    # symbolic hotkeys it disabled for switcherTakeOverSystemShortcuts, which
+    # it needs in order to restore them.
     CustomUserPreferences."com.vorssaint.utils" = {
       autoQuitEnabled = true;
       clamshellPreferred = false;
@@ -138,7 +139,7 @@ in
       switcherTreatHiddenAppsLikeMinimized = true;
 
       windowLayoutShortcutsEnabled = true;
-      windowMaximizeEnabled = true;
+      windowMaximizeEnabled = false;
     };
 
     # The Defaults package stores enums JSON-encoded, quotes included.
