@@ -11,6 +11,8 @@
 
     taps = [ "fif7y/tap" ];
 
+    brews = [ "git-annex" ];
+
     casks = [
       "bitwarden"
       "codexbar"
