@@ -13,6 +13,7 @@
     ./wezterm.nix
     ./scripts.nix
     ./agents.nix
+    ./codexbar.nix
   ];
 
   home.username = "martin";

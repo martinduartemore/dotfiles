@@ -13,6 +13,7 @@
 
     casks = [
       "bitwarden"
+      "codexbar"
       "discord"
       "ente-auth"
       "firefox"
