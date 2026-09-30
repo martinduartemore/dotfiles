@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Apply the nix configuration for a machine.
+# Update nixpkgs, then apply the nix configuration for a machine.
 #
 # Usage: ./rebuild.sh [hostname]
 #   hostname  Target host (default: this machine's short hostname).
@@ -22,6 +22,9 @@ main() {
   os="$(detect_os)"
   target="$(flake_target "$os" "${1:-}")"
   flake="$(repo_root)"
+
+  log "Updating nixpkgs..."
+  nix flake update nixpkgs --flake "$flake"
 
   log "Rebuilding ${target} (${os})..."
   rebuild "$os" "$target" "$flake"

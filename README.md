@@ -47,7 +47,7 @@ current host. Target another machine with `./bootstrap.sh <hostname>`.
 ## Apply changes
 
 ```sh
-./rebuild.sh                 # sudo darwin-rebuild switch (macOS) | home-manager switch (Linux)
+./rebuild.sh                 # nix flake update nixpkgs, then sudo darwin-rebuild switch (macOS) | home-manager switch (Linux)
 ```
 
 Validate without activating:
