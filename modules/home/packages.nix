@@ -22,5 +22,9 @@
     ansible
     fluxcd
     python3Packages.huggingface-hub
+
+    opencode
+    pi-coding-agent
+    (callPackage ../../pkgs/claude-swap.nix { })
   ];
 }
