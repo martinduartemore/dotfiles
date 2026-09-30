@@ -14,6 +14,8 @@ in
     ".claude/CLAUDE.md".source = link "global/AGENTS.md";
     ".claude/settings.json".source = link "claude/settings.json";
 
+    ".claude-personal/claude/settings.json".source = link "claude/settings.personal.json";
+
     ".codex/skills".source = link "skills";
     ".codex/prompts".source = link "prompts";
     ".codex/AGENTS.md".source = link "global/AGENTS.md";
