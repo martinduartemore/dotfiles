@@ -24,19 +24,6 @@ let
     viewOptionsVersion = 1;
   };
 
-  # Only reached in windows still pinned to list view (Recents, search results).
-  # Restated here because `defaults write` replaces a dict outright instead of
-  # merging, so anything omitted would be dropped on every rebuild.
-  listView = {
-    calculateAllSizes = false;
-    iconSize = 16;
-    showIconPreview = true;
-    sortColumn = "name";
-    textSize = 13;
-    useRelativeDates = true;
-    viewOptionsVersion = 1;
-  };
-
   galleryView = {
     arrangeBy = "name";
     iconSize = 48.0;
@@ -78,20 +65,22 @@ in
     # FXPreferredViewStyle above only covers folders with no saved setting.
     # These are the "Use as Defaults" dicts behind View Options; macOS 26's
     # Finder keeps a legacy and an FK_ copy of them and reads both.
+    #
+    # ListViewSettings and ExtendedListViewSettingsV2 are deliberately absent:
+    # both carry a `columns` array that `defaults write` would drop, and a
+    # column-less list view aborts Finder with `-[TListCellView
+    # iconImageView]: unrecognized selector` the moment the Share sheet asks a
+    # row for its source frame.
     CustomUserPreferences."com.apple.finder" = {
       StandardViewSettings = {
         SettingsType = "StandardViewSettings";
         IconViewSettings = iconView;
-        ListViewSettings = listView;
-        ExtendedListViewSettingsV2 = listView;
         GalleryViewSettings = galleryView;
       };
 
       FK_StandardViewSettings = {
         SettingsType = "FK_StandardViewSettings";
         IconViewSettings = iconView;
-        ListViewSettings = listView;
-        ExtendedListViewSettingsV2 = listView;
       };
 
       FK_DefaultIconViewSettings = iconView;
