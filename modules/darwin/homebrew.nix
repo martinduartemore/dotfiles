@@ -29,6 +29,7 @@
       "obsidian"
       "orbstack"
       "fif7y/tap/pelmet"
+      "protonvpn"
       "raycast"
       "visual-studio-code"
       "vorssaint"
