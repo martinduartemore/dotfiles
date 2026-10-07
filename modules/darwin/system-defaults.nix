@@ -52,7 +52,11 @@ in
       FXPreferredViewStyle = "icnv";
     };
 
-    trackpad.Clicking = true;
+    trackpad = {
+      Clicking = true;
+      TrackpadThreeFingerHorizSwipeGesture = 2;
+      TrackpadFourFingerHorizSwipeGesture = 0;
+    };
 
     NSGlobalDomain = {
       KeyRepeat = 2;
@@ -130,9 +134,6 @@ in
       windowLayoutShortcutsEnabled = true;
       windowMaximizeEnabled = false;
     };
-
-    # The Defaults package stores enums JSON-encoded, quotes included.
-    CustomUserPreferences."com.lujjjh.LinearMouse".menuBarVisibilityMode = ''"never"'';
   };
 
   # Per-folder view styles live as `vstl` records inside each parent's
@@ -144,10 +145,17 @@ in
   #
   # nix-darwin restarts Dock but never Finder, and a running Finder can write
   # its cached state back over what userDefaults just wrote. SIGKILL skips that
-  # flush; launchd relaunches Finder immediately. postActivation runs after
-  # userDefaults, so the fresh prefs are on disk by now.
+  # flush. postActivation runs after userDefaults, so the fresh prefs are on
+  # disk by now.
+  #
+  # launchd relaunches Dock and Finder on its own only while the GUI session is
+  # not in on-demand-only mode; a stuck package install script can hold it
+  # there and leave both dead, so they are kickstarted explicitly.
   system.activationScripts.postActivation.text = ''
     echo >&2 "restarting Finder..."
     killall -KILL -u ${user} Finder || true
+    uid="$(id -u -- ${user})"
+    launchctl kickstart "gui/$uid/com.apple.Dock.agent" || true
+    launchctl kickstart "gui/$uid/com.apple.Finder" || true
   '';
 }
