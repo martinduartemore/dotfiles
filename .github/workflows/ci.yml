@@ -21,4 +21,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
-      - run: nix build .#darwinConfigurations.martins-macbook-pro.system -L
+      # The agent CLIs are prebuilt here; without it codex compiles from source.
+      - run: >-
+          nix build .#darwinConfigurations.martins-macbook-pro.system -L
+          --option extra-substituters https://cache.numtide.com
+          --option extra-trusted-public-keys niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=

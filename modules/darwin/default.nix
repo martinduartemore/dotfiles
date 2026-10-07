@@ -4,10 +4,21 @@
     ./homebrew.nix
     ./system-defaults.nix
     ./fonts.nix
+    ./agents.nix
+    ./stylix.nix
   ];
 
   # Determinate Nix manages the daemon and nix.conf; nix-darwin must not.
-  nix.enable = false;
+  # The agent cache lets codex and friends download prebuilt instead of compiling.
+  determinateNix = {
+    enable = true;
+    customSettings = {
+      extra-substituters = [ "https://cache.numtide.com" ];
+      extra-trusted-public-keys = [
+        "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+      ];
+    };
+  };
 
   security.pam.services.sudo_local.touchIdAuth = true;
   programs.zsh.enable = true;

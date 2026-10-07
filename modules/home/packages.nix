@@ -8,7 +8,6 @@
       watch
       wget
 
-      gh
       awscli2
       terraform
       ffmpeg
@@ -24,9 +23,10 @@
       fluxcd
       python3Packages.huggingface-hub
 
-      opencode
-      pi-coding-agent
-      (callPackage ../../pkgs/claude-swap.nix { })
+      uv
+      bun
+      rustup
+      cargo-watch
     ]
     # Homebrew's bottle on macOS: nixpkgs' darwin build fails its gpg tests.
     ++ lib.optionals (!pkgs.stdenv.hostPlatform.isDarwin) [ git-annex ];

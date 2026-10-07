@@ -1,6 +1,10 @@
-{ ... }:
+{ inputs, ... }:
 {
-  imports = [ ../../modules/darwin ];
+  imports = [
+    ../../modules/darwin
+    ../../modules/darwin/work.nix
+    ../../modules/darwin/personal.nix
+  ];
 
   networking.hostName = "martins-macbook-pro";
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -16,6 +20,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "hm-bak";
+    extraSpecialArgs = { inherit inputs; };
     users.martin = import ../../modules/home;
   };
 

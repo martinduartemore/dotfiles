@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
-# Update nixpkgs, then apply the nix configuration for a machine.
+# Update nixpkgs, the agent CLIs and the Homebrew taps, then apply the nix
+# configuration for a machine.
 #
 # Usage: ./rebuild.sh [hostname]
 #   hostname  Target host (default: this machine's short hostname).
@@ -23,8 +24,8 @@ main() {
   target="$(flake_target "$os" "${1:-}")"
   flake="$(repo_root)"
 
-  log "Updating nixpkgs..."
-  nix flake update nixpkgs --flake "$flake"
+  log "Updating nixpkgs, llm-agents and Homebrew taps..."
+  nix flake update nixpkgs llm-agents homebrew-core homebrew-cask homebrew-fif7y --flake "$flake"
 
   log "Rebuilding ${target} (${os})..."
   rebuild "$os" "$target" "$flake"

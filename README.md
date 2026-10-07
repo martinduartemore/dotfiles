@@ -24,8 +24,10 @@ hosts/
   martins-macbook-pro/       # macOS host (nix-darwin system)
   martin-desktop/            # Linux host (home-manager)
 modules/
-  darwin/                    # macOS system: homebrew casks, defaults, fonts, PATH
+  darwin/                    # macOS system: homebrew casks, defaults, fonts, PATH, stylix
+    work.nix, personal.nix   # per-context casks, imported by the host
   home/                      # portable home-manager modules (see below)
+homebrew-tap/                # local casks for apps Homebrew doesn't ship
 config/{nvim,wezterm,tmux}   # editor/terminal configs, symlinked to the repo so they stay editable
 bash/{prompt,functions}      # bash fragments read into the generated ~/.bashrc
 ```
@@ -47,7 +49,7 @@ current host. Target another machine with `./bootstrap.sh <hostname>`.
 ## Apply changes
 
 ```sh
-./rebuild.sh                 # nix flake update nixpkgs, then sudo darwin-rebuild switch (macOS) | home-manager switch (Linux)
+./rebuild.sh                 # update nixpkgs, llm-agents and Homebrew taps, then sudo darwin-rebuild switch (macOS) | home-manager switch (Linux)
 ```
 
 Validate without activating:
@@ -94,14 +96,16 @@ The checkout is mutable and **not** pinned by the flake, so machines don't conve
 
 ## Platform notes
 
-- **macOS** — GUI apps are Homebrew casks (managed by nix-darwin's `homebrew` module); all CLI
-  tooling is nix or [mise]. System settings (dock, finder, keyboard) live in
-  `modules/darwin/system-defaults.nix`.
+- **macOS** — GUI apps are Homebrew casks (managed by nix-darwin's `homebrew` module), with
+  Homebrew itself and its taps pinned by [nix-homebrew]. All CLI tooling is nix or [mise]. System
+  settings (dock, finder, keyboard) live in `modules/darwin/system-defaults.nix`.
 - **Linux** — bash login shell, Wayland clipboard (`wl-copy`), GNOME settings via dconf. System
   packages (`build-essential`, `clang`, drivers, …) are **not** nix-managed on non-NixOS — install
   those with `apt`.
-- **Agent CLIs** (claude, codex, opencode, pi) are managed outside nix (native installer / mise) so
-  they can update daily. Their artifacts come from [dotagents] — see above.
+- **Agent CLIs** (claude, codex, opencode, pi) come from [llm-agents.nix], pinned in `flake.lock`.
+  A launchd job (`update-agents`, 05:00 daily) bumps that input and switches; run `update-agents`
+  to do it by hand. It skips when the tree has uncommitted changes other than `flake.lock`. Their
+  artifacts come from [dotagents] — see above.
 
 ## Quality
 
@@ -113,4 +117,6 @@ and in GitHub Actions CI. Install the hook locally with `nix develop`. Format ev
 [nix-darwin]: https://github.com/nix-darwin/nix-darwin
 [home-manager]: https://github.com/nix-community/home-manager
 [mise]: https://mise.jdx.dev
+[nix-homebrew]: https://github.com/zhaofengli/nix-homebrew
+[llm-agents.nix]: https://github.com/numtide/llm-agents.nix
 [treefmt]: https://github.com/numtide/treefmt-nix

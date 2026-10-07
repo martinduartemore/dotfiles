@@ -48,6 +48,7 @@
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
+    globalConfig.tools.node = "24";
   };
 
   # Shared across shells (zsh + bash).

@@ -23,6 +23,30 @@
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/3";
+
+    # Not following our nixpkgs: cache.numtide.com only hits on its own pin.
+    llm-agents.url = "github:numtide/llm-agents.nix";
+
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    homebrew-fif7y = {
+      url = "github:fif7y/homebrew-tap";
+      flake = false;
+    };
   };
 
   outputs =
@@ -33,6 +57,7 @@
       home-manager,
       treefmt-nix,
       git-hooks,
+      ...
     }:
     let
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -49,6 +74,9 @@
         modules = [
           ./hosts/martins-macbook-pro
           home-manager.darwinModules.home-manager
+          inputs.determinate.darwinModules.default
+          inputs.nix-homebrew.darwinModules.nix-homebrew
+          inputs.stylix.darwinModules.stylix
         ];
       };
 
@@ -59,6 +87,7 @@
           system = "x86_64-linux";
           config.allowUnfree = true;
         };
+        extraSpecialArgs = { inherit inputs; };
         modules = [ ./hosts/martin-desktop ];
       };
 

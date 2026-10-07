@@ -4,6 +4,7 @@
     ./zsh.nix
     ./bash.nix
     ./git.nix
+    ./gh.nix
     ./ssh.nix
     ./packages.nix
     ./fonts.nix
